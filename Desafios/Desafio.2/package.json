@@ -1,0 +1,12 @@
+{
+  "name": "desafio.2",
+  "version": "1.0.0",
+  "description": "Desafio Numero 2 Coder Backend-51185",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Agustin J. Perez Rodriguez",
+  "license": "ISC"
+}

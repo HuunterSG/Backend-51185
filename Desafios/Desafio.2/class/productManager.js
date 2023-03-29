@@ -41,20 +41,23 @@ import fs from 'fs';
         //encuentro el producto a modificar
         const productoAModificar = productos.find(producto => producto.id === id);
         
-        //si no es el producto doy error
+            //si no es el producto doy error
         if(!productoAModificar){
             return  `producto no disponible`
         }
-
+        
         //obtengo indice del obj viejo para actualizar con el nuevo
         const index = productos.findIndex(producto=> producto === productoAModificar)
         
         //Leo datos de request
-        const{title,price,thumbnail} = newProd;
+        const{title,price,thumbnail,description,code,stock} = newProd;
         
         //modifico obj
         productoAModificar.title= title;
+        productoAModificar.description= description;
+        productoAModificar.code= code;
         productoAModificar.price= price;
+        productoAModificar.stock= stock;
         productoAModificar.thumbnail= thumbnail;
 
         //cambio posicion para luego guardar
@@ -63,7 +66,7 @@ import fs from 'fs';
         await fs.promises.writeFile(this.ruta, JSON.stringify(productos, 'utf-8'))
 
         //Respuesta sobre producto modificado
-        return `msg: 'El producto fue modificado con exito', ${productoAModificar}`
+        return  productoAModificar
     }
 
     async getById(id){

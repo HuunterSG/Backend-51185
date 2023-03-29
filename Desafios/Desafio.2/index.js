@@ -35,11 +35,11 @@ const product4 = {
     stock: 25
   }
     const updatePro ={
-        title:'Cerveza Andes IPA',
+        title:'whisky',
         description:'Bebida alcoholica altamente gasificada',
         thumbnail:'#',
         code:'fg155h',
-        price: 1000,
+        price: 13000,
         stock: 25
     }
 
@@ -86,11 +86,16 @@ async function challenge(){
     console.log(prodModif)
     console.log('-- xxxxxxxx --')
 
-    // console.log('Delete All')
-    // objs = await file.deleteAll();
-    // objs = await file.getAll();
-    // console.table(objs)
-    // console.log('-- xxxxxxxx --')
+    console.log('Products: ')
+    objs = await file.getAll();
+    console.table(objs)
+    console.log('-- xxxxxxxx --')
+
+    console.log('Delete All')
+    objs = await file.deleteAll();
+    objs = await file.getAll();
+    console.table(objs)
+    console.log('-- xxxxxxxx --')
 }
 
 challenge();

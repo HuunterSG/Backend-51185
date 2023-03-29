@@ -34,17 +34,17 @@ const product4 = {
     price: 1000,
     stock: 25
   }
-// const updatePro ={
-//     title:'Cerveza Andes IPA',
-//     description:'Bebida alcoholica altamente gasificada',
-//     thumbnail:'#',
-//     code:'fg155h',
-//     price: 1000,
-//     stock: 25
-// }
+    const updatePro ={
+        title:'Cerveza Andes IPA',
+        description:'Bebida alcoholica altamente gasificada',
+        thumbnail:'#',
+        code:'fg155h',
+        price: 1000,
+        stock: 25
+    }
 
 async function challenge(){
-    const file = new Contenedor('./db/Drinks.txt');
+    const file = new Contenedor('./db/Drinks.json');
     
     console.log('Products: ')
     let objs = await file.getAll();
@@ -81,20 +81,16 @@ async function challenge(){
     console.table(objs)
     console.log('-- xxxxxxxx --')
     
-    // console.log('Update Product')
-    // let prodUP = await file.updateProd({title:'Cerveza Andes IPA',
-    // description:'Bebida alcoholica altamente gasificada',
-    // thumbnail:'#',
-    // code:'fg155h',
-    // price: 1000,
-    // stock: 25})
-    // console.log(prodUP)
-
-    console.log('Delete All')
-    objs = await file.deleteAll();
-    objs = await file.getAll();
-    console.table(objs)
+    console.log('Update Product \n')
+    let prodModif = await file.updateProd(2, updatePro)
+    console.log(prodModif)
     console.log('-- xxxxxxxx --')
+
+    // console.log('Delete All')
+    // objs = await file.deleteAll();
+    // objs = await file.getAll();
+    // console.table(objs)
+    // console.log('-- xxxxxxxx --')
 }
 
 challenge();

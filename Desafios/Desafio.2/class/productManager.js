@@ -35,24 +35,20 @@ import fs from 'fs';
         }
     }
 
-    async updateProd(id,...newProd){
+    async updateProd(id,newProd){
         //leo base de datos
-        const productos = JSON.parse(fs.promises.readFile(this.ruta,'utf-8'));
-        console.log(productos)
-        //id del producto a modificar
-        const idProductoAModificar = id;
-        console.log(idProductoAModificar)
-        
+        const productos = await this.getAll()
         //encuentro el producto a modificar
-        const productoAModificar = productos.find(producto => producto.id === idProductoAModificar);
-            //si no es el producto doy error
+        const productoAModificar = productos.find(producto => producto.id === id);
+        
+        //si no es el producto doy error
         if(!productoAModificar){
-            return  console.log( 'producto no disponible')
+            return  `producto no disponible`
         }
 
         //obtengo indice del obj viejo para actualizar con el nuevo
         const index = productos.findIndex(producto=> producto === productoAModificar)
-
+        
         //Leo datos de request
         const{title,price,thumbnail} = newProd;
         
@@ -64,10 +60,10 @@ import fs from 'fs';
         //cambio posicion para luego guardar
         productos.splice(index, 1, productoAModificar);
 
-        fs.promises.writeFile(this.ruta, JSON.stringify(productos, 'utf-8'))
+        await fs.promises.writeFile(this.ruta, JSON.stringify(productos, 'utf-8'))
 
         //Respuesta sobre producto modificado
-        return console.log(`msg: 'El producto fue modificado con exito', ${productoAModificar}`)
+        return `msg: 'El producto fue modificado con exito', ${productoAModificar}`
     }
 
     async getById(id){

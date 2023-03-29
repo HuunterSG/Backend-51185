@@ -1,67 +1,106 @@
-import fs from 'fs'
+import fs from 'fs';
 
-
-export default class ProductManager{
-    constructor(path){
-        this.path = path
+ export default class Contenedor {
+    constructor(ruta) {
+        this.ruta = ruta
     }
 
-    getProducts= async () => {
+
+    async getAll(){
+        try{
+            const objs= await fs.promises.readFile(this.ruta,'utf-8')
+            return JSON.parse(objs)
+        }catch{
+            return []
+        }
+    }
+
+    async save(obj){
+        const objs= await this.getAll();
+        let newId;
+
+        if (objs.length == 0){
+            newId=1;
+        }else{
+            newId= objs[objs.length - 1].id + 1;
+        }
+
+        const newObj = {...obj, id: newId}
+        objs.push(newObj);
         try {
-            if(fs.existsSync(this.path)){
-                const data= await fs.promises.readFile(this.path, 'utf-8')
-                const objs= JSON.parse(data)
-                return objs  
-            }else{
-                return []
+            await fs.promises.writeFile(this.ruta, JSON.stringify(objs,null,2));
+                return newId
+        }catch(error){
+            console.log(`Error to save the object ${error}`)
+        }
+    }
+
+    async updateProd(id,...newProd){
+        //leo base de datos
+        const productos = JSON.parse(fs.promises.readFile(this.ruta,'utf-8'));
+        console.log(productos)
+        //id del producto a modificar
+        const idProductoAModificar = id;
+        console.log(idProductoAModificar)
+        
+        //encuentro el producto a modificar
+        const productoAModificar = productos.find(producto => producto.id === idProductoAModificar);
+            //si no es el producto doy error
+        if(!productoAModificar){
+            return  console.log( 'producto no disponible')
+        }
+
+        //obtengo indice del obj viejo para actualizar con el nuevo
+        const index = productos.findIndex(producto=> producto === productoAModificar)
+
+        //Leo datos de request
+        const{title,price,thumbnail} = newProd;
+        
+        //modifico obj
+        productoAModificar.title= title;
+        productoAModificar.price= price;
+        productoAModificar.thumbnail= thumbnail;
+
+        //cambio posicion para luego guardar
+        productos.splice(index, 1, productoAModificar);
+
+        fs.promises.writeFile(this.ruta, JSON.stringify(productos, 'utf-8'))
+
+        //Respuesta sobre producto modificado
+        return console.log(`msg: 'El producto fue modificado con exito', ${productoAModificar}`)
+    }
+
+    async getById(id){
+        
+        const objs = await this.getAll()
+        const obj = objs.find(o => o.id == id);
+        return obj
+        
+
+    }
+
+    async deleteById(id){
+        let collection = []
+        await fs.promises.readFile(`./${this.ruta}`,'utf-8')
+        .then( cont => {
+            let collect = JSON.parse(cont)
+            for (const x of collect){
+                if(x.id != id){
+                    collection.push(x)
+                }
             }
-        } catch (error) {
-           console.log(`No existen productos`)
-        }
+        })
+        .catch( error => console.log(error));
+        await fs.promises.writeFile(`./${this.ruta}`, JSON.stringify(collection));
+        console.log('Delete Object with ID!');
+       
     }
 
-    getProductsById= async (id)=>{
-        try {
-            const objs= await this.getProducts()
-            const obj =objs.find(ob=>ob.id === id)
-            return obj
-        } catch (error) {
-            console.log(`Objeto no encontrado ${error}`)
-        }
+    async deleteAll(){
+        await fs.promises.writeFile(`./${this.ruta}`, '');
+        console.log('Delete all objects')
+        
     }
 
-    addProduct= async (product)=>{
-        try {
-            const objs= await this.getProducts();
-            if(objs.length === 0){
-                product.id = 1
-            }else{
-                product.id = objs[objs.length-1].id+1;
-            }
-            objs.push(product)
-            
-            await fs.promises.writeFile(this.path, JSON.stringify(objs,null,'\t'))
-            return product
-        } catch (error) {
-            console.log(`El producto no se pudo crear ${error}`)
-        }
-    }
-
-    updateProduct= async (id, ...prod)=>{
-        try {
-            let oldProd= await this.getProductsById(id)
-            let newProd=[{...prod,id},...oldProd]
-            await fs.promises.writeFile(this.path, JSON.stringify(newProd))
-            return newProd
-        } catch (error) {
-            console.log(`El producto no se pudo actualizar ${error}`)
-        }
-    }
-
-    deleteProduct= async (id)=>{
-        let prod = await this.getProducts()
-        let deleteProd = prod.find(product=>product.id != id)
-        await fs.promises.writeFile(this.path, JSON.stringify(deleteProd))
-        console.log(`Producto eliminado ${deleteProd}`)
-    }
 }
+

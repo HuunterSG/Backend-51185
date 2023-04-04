@@ -1,6 +1,6 @@
 import fs from 'fs';
 
- export default class productManager {
+ export default class ProductManager {
     constructor(path) {
         this.path = path
     }
@@ -9,7 +9,8 @@ import fs from 'fs';
     async getProduct(){
         try{
             const objs= await fs.promises.readFile(this.path,'utf-8')
-            return objs
+           
+            return  JSON.parse(objs)
             
         }catch{
             return []
@@ -71,9 +72,9 @@ import fs from 'fs';
     }
 
     async getById(id){
-        
+        let objId= parseInt(id)
         const objs = await this.getProduct()
-        const obj = objs.find(o => o.id == id);
+        const obj = objs.find(o => o.id === objId);
         return obj
         
 

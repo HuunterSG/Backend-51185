@@ -1,9 +1,9 @@
 import express from 'express'
-import productManager from './ProductManager/productManager.js'
+import ProductManager from './ProductManager/productManager.js'
 
 
 const app = express()
-const drinks = new productManager('./DB/drinks.json')
+const drinks = new ProductManager('./drinks.json')
 const prods = drinks.getProduct()
 const PORT = 8080
 const server = app.listen(PORT,()=>{
@@ -14,17 +14,23 @@ app.use(express.urlencoded({extended:true}))
 
 app.get('/products', async (req, res)=>{
     let limit = parseInt(req.query.limit)
-
-    if(!limit) return res.send(await prods)
     let allDrinks= await prods
-    let limitDrinks= allDrinks.slice(0,limit)
-    res.send(limitDrinks)
+    console.log(limit)
+    if(!limit){
+         return res.send(allDrinks)
+    }else if(limit< allDrinks.length){
+        let limitDrinks= allDrinks.slice(0, limit)
+        return res.send(limitDrinks)
+    }else{
+        return res.send({msg:'el limit supera los objetos, aqui estan los prod: ', allDrinks})
+    }
+    
+    
 })
 
 app.get('/products/:id', async (req,res)=>{
     let id = parseInt(req.params.id)
-    let allDrinks = await prods
-    let drinkById= allDrinks.find(drink=>drink.id === id)
+    let drinkById= await drinks.getById(id)
     res.send(drinkById)
 })
 

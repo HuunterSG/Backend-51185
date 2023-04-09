@@ -1,0 +1,15 @@
+{
+  "name": "primerentrega",
+  "version": "1.0.0",
+  "description": "Primer Entrega del Proyecto Final Backend 51185",
+  "type":"module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Agustin Jose Perez Rodriguez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

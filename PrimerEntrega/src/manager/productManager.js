@@ -2,7 +2,7 @@ import fs from 'fs';
 
  export default class ProductManager {
     constructor() {
-        this.path = 'C:\Users\Huunter\Desktop\BackEnd51185\PrimerEntrega\src\db\products.json'
+        this.path = '../db/products.json'
     }
 
 

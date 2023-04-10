@@ -1,95 +1,55 @@
 [
-  {
-    "title": "SWING",
-    "description": "Delux whisky reserve ",
-    "price": 23780,
-    "img": "https://i.ibb.co/3Bhwm06/img-swing.png",
-    "code": "cod001",
-    "stock": 34,
-    "id": 1
-  },
-  {
-    "title": "SWING",
-    "description": "Delux whisky reserve ",
-    "price": 23780,
-    "img": "https://i.ibb.co/3Bhwm06/img-swing.png",
-    "code": "cod001",
-    "stock": 34,
-    "id": 2
-  },
-  {
-    "title": "SWING",
-    "description": "Delux whisky reserve ",
-    "price": 23780,
-    "img": "https://i.ibb.co/3Bhwm06/img-swing.png",
-    "code": "cod001",
-    "stock": 34,
-    "id": 3
-  },
-  {
-    "title": "Gin",
-    "description": "Bebida apta para mayores de 18 años",
-    "code": "123fdas",
-    "price": 12000,
-    "status": true,
-    "stock": 25,
-    "category": "bebida alcoholica",
-    "thumbnails": "#",
-    "id": 4
-  },
-  {
-    "title": "Gin",
-    "description": "Bebida apta para mayores de 18 años",
-    "code": "123fdadsas",
-    "price": 12000,
-    "status": true,
-    "stock": 25,
-    "category": "bebida alcoholica",
-    "thumbnails": "#",
-    "id": 5
-  },
-  {
-    "title": "Gin",
-    "description": "Bebida apta para mayores de 18 años",
-    "code": "123fdadsas",
-    "price": 12000,
-    "status": true,
-    "stock": 25,
-    "category": "bebida alcoholica",
-    "thumbnails": "#",
-    "id": 6
-  },
-  {
-    "title": "Tequila",
-    "description": "Bebida apta para mayores de 18 años",
-    "code": "123241adsas",
-    "price": 12000,
-    "status": true,
-    "stock": 25,
-    "category": "bebida alcoholica",
-    "thumbnails": "#",
-    "id": 7
-  },
-  {
-    "title": "Cerveza",
-    "description": "Bebida apta para mayores de 18 años",
-    "code": "123241adsas",
-    "price": 12000,
-    "status": true,
-    "stock": 25,
-    "category": "bebida alcoholica",
-    "thumbnails": "#",
-    "id": 8
-  },
-  {
-    "title": "Absenta",
-    "description": "Bebida apta para mayores de 18 años",
-    "code": "123241adsas",
-    "price": 12000,
-    "status": true,
-    "stock": 25,
-    "category": "bebida alcoholica",
-    "thumbnails": "#",
-    "id": 9
-  }
+   {
+      "title": "SWING",
+      "description": "Delux whisky reserve ",
+      "price": 23780,
+      "img": "https://i.ibb.co/3Bhwm06/img-swing.png",
+      "code": "cod001",
+      "stock": 34,
+      "id": 1
+   },
+   {
+      "title": "Gin",
+      "description": "Bebida apta para mayores de 18 años",
+      "code": "123fdadsas",
+      "price": 12000,
+      "status": true,
+      "stock": 25,
+      "category": "bebida alcoholica",
+      "thumbnails": "#",
+      "id": 4
+   },
+   {
+      "title": "Tequila",
+      "description": "Bebida apta para mayores de 18 años",
+      "code": "123241adsas",
+      "price": 12000,
+      "status": true,
+      "stock": 25,
+      "category": "bebida alcoholica",
+      "thumbnails": "#",
+      "id": 5
+   },
+   {
+      "title": "Cerveza",
+      "description": "Bebida apta para mayores de 18 años",
+      "code": "123241adsas",
+      "price": 12000,
+      "status": true,
+      "stock": 25,
+      "category": "bebida alcoholica",
+      "thumbnails": "#",
+      "id": 6
+   },
+   {
+      "title": "Absenta",
+      "description": "Bebida apta para mayores de 18 años",
+      "code": "123241adsas",
+      "price": 12000,
+      "status": true,
+      "stock": 25,
+      "category": "bebida alcoholica",
+      "thumbnails": "#",
+      "id": 7
+   }
 ]

@@ -31,7 +31,7 @@ import fs from 'fs';
         objs.push(newObj);
         try {
             await fs.promises.writeFile(this.path, JSON.stringify(objs,null,2));
-                return newId
+                return newObj
         }catch(error){
             console.log(`Error to save the object ${error}`)
         }

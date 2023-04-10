@@ -1,8 +1,8 @@
 import fs from 'fs';
 
  export default class ProductManager {
-    constructor() {
-        this.path = '../db/products.json'
+    constructor(path) {
+        this.path = path
     }
 
 

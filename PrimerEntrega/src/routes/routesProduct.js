@@ -1,5 +1,6 @@
 import { Router } from "express";
 import  {productGet} from './logicPRoutes.js'
+
 const productRouter = Router()
 
 productRouter.get('/',productGet)

@@ -1,15 +1,13 @@
 import ProductManager from "../manager/productManager.js";
 
-const db = new ProductManager()
+const db = new ProductManager('../db/products.json')
 const prods= db.getProduct()
 const productGet = async (req,res)=>{
     try {
         let limit = parseInt(req.query.limit)
         let allDrinks= await prods
         console.log(allDrinks)
-        if (isNaN(limit)) {
-            return res.status(400).send({ msg: 'Limit debe ser un número', allDrinks });
-        }
+        
         if(!limit){
             return res.send(allDrinks)
         }

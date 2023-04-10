@@ -41,7 +41,8 @@ import fs from 'fs';
         //leo base de datos
         const productos = await this.getProduct()
         //encuentro el producto a modificar
-        const productoAModificar = productos.find(producto => producto.id === id);
+        const idProd= parseInt(id)
+        const productoAModificar = productos.find(producto => producto.id === idProd);
         
             //si no es el producto doy error
         if(!productoAModificar){
@@ -52,15 +53,17 @@ import fs from 'fs';
         const index = productos.findIndex(producto=> producto === productoAModificar)
         
         //Leo datos de request
-        const{title,price,thumbnail,description,code,stock} = newProd;
+        const{title,description,code,price,status,stock,category,thumbnails} = newProd;
         
         //modifico obj
         productoAModificar.title= title;
         productoAModificar.description= description;
         productoAModificar.code= code;
         productoAModificar.price= price;
+        productoAModificar.status=status
         productoAModificar.stock= stock;
-        productoAModificar.thumbnail= thumbnail;
+        productoAModificar.category= category
+        productoAModificar.thumbnails= thumbnails;
 
         //cambio posicion para luego guardar
         productos.splice(index, 1, productoAModificar);
@@ -81,19 +84,20 @@ import fs from 'fs';
     }
 
     async deleteProduct(id){
-        const products = await this.getProduct()
-        .then( cont => {
-            let collect = JSON.parse(cont)
-            for (const x of collect){
-                if(x.id != id){
-                    products.push(x)
-                }
-            }
-        })
-        .catch( error => console.log(error));
-        await fs.promises.writeFile(`./${this.path}`, JSON.stringify(products));
-        console.log('Delete Object with ID!');
-       
+        try{
+            const elements =await this.getProduct();
+            const elementIndex = elements.findIndex((elem) => elem.id === id)
+
+            if(elementIndex === -1) return{error: "No hemos encontrado el ELEMENTO!"}
+
+            //armamos array con todos los elementos menos el del id
+            const newElements= elements.filter((elem)=> elem.id != id)
+            await fs.promises.writeFile(this.path, JSON.stringify(newElements,null,3))
+
+            return elements
+        }catch(error){
+            return(error)
+        }
     }
 
     async deleteAll(){

@@ -1,5 +1,6 @@
 import ProductManager from "../manager/productManager.js";
 import * as url from 'url';
+import { joiValidator } from "../utils/validator.js";
 
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -38,7 +39,16 @@ const getProductById =async (req,res)=>{
 const productPost = async (req,res)=>{
     try {
         const {title,description,code,price,status,stock,category,thumbnails}= req.body
-        const obj= {title,description,code,price,status,stock,category,thumbnails}
+        const obj = await joiValidator.product.validateAsync({
+            title,
+            description,
+            code,
+            price,
+            status,
+            stock,
+            category,
+            thumbnails
+        })
         const productAdd = await db.addProduct(obj)
         return res.status(200).send({msg: 'el producto se ha cargado con exito',productAdd})
     } catch (error) {
@@ -46,4 +56,45 @@ const productPost = async (req,res)=>{
     }
 }
 
-export {productGet, getProductById, productPost}
+const productPut = async (req,res)=>{
+    try{
+        const {id} = req.params
+        const {title,description,code,price,status,stock,category,thumbnails} = req.body
+        const product = await joiValidator.product.validateAsync({
+            title,
+            description,
+            code,
+            price,
+            status,
+            stock,
+            category,
+            thumbnails
+        })
+        const productUpdate = await db.updateProd(id, product)
+
+        res.status(200).send({msg:'Se ha actualizado el producto', productUpdate})
+    }catch(error){
+        console.log(error)
+    }
+}
+
+const productDelete = async (req,res)=>{
+    try{
+        const id= parseInt(req.params.id)
+        const productDelete = await db.getById(id)
+        if(!productDelete){
+            throw { error: 'no existe el prod'}
+        }
+        const products= await db.deleteProduct(id)
+
+        res.status(200).send({
+            mensaje: 'Producto exitosamente eliminado',
+            productoEliminado: productDelete,
+            productsInList:products
+        })
+    }catch(error){
+        console.log(error)
+    }
+}
+
+export {productGet, getProductById, productPost, productPut, productDelete}

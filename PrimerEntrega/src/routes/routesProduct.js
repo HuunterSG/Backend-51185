@@ -1,11 +1,11 @@
 import { Router } from "express";
-import  {productGet, getProductById} from './logicPRoutes.js'
+import  {productGet, getProductById, productPost} from './logicPRoutes.js'
 
 const productRouter = Router()
 
 productRouter.get('/',productGet)
 productRouter.get('/:id', getProductById)
-productRouter.post('/',)
+productRouter.post('/', productPost)
 productRouter.put('/:id',)
 productRouter.delete('/:id',)
 

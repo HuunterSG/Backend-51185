@@ -11,7 +11,8 @@ import fs from 'fs';
             const objs= await fs.promises.readFile(this.path,'utf-8')
            
             return  JSON.parse(objs)
-        }catch{
+        }catch(error){
+            console.log(error)
             return []
         }
     }

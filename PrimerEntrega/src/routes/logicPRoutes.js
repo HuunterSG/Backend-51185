@@ -1,12 +1,15 @@
 import ProductManager from "../manager/productManager.js";
+import * as url from 'url';
 
-const db = new ProductManager('../db/products.json')
+const dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
+const db = new ProductManager(dirname+'../db/products.json')
 const prods= db.getProduct()
+
 const productGet = async (req,res)=>{
     try {
         let limit = parseInt(req.query.limit)
         let allDrinks= await prods
-        console.log(allDrinks)
         
         if(!limit){
             return res.send(allDrinks)
@@ -22,8 +25,14 @@ const productGet = async (req,res)=>{
     }
 }
 
-const getProductById = async(req,res)=>{
-
+const getProductById =async (req,res)=>{
+    try {
+        let id = parseInt(req.params.id)
+        let drinkById= await db.getById(id)
+        return res.send(drinkById)
+    } catch (error) {
+        console.log(`Ha ocurrido un error: ${error}`)
+    }
 }
 
-export {productGet}
+export {productGet, getProductById}

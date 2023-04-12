@@ -6,7 +6,7 @@ const cartRouter = Router()
 
 cartRouter.get('/:id', getCartById)
 cartRouter.post('/', cartPost)
-cartRouter.post('/:id/produc/:pid', prodPostInC)
+cartRouter.post('/:id/products/:pid', prodPostInC)
 
 
 export default cartRouter

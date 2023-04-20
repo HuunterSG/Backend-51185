@@ -14,14 +14,14 @@ const server = app.listen(PORT, ()=>{
     console.log(`server on, run in port: ${PORT}`)
 })
 
-// Estructura Handlebars
+
 app.engine('handlebars', handlebars.engine());
 app.set('views', dirname+ './views');
 app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-// Estaticos
+
 app.use(express.static(dirname+'/public'));
 
 app.use('/', viewsRouter)

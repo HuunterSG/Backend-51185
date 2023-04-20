@@ -6,13 +6,7 @@ const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const viewsRouter = Router()
 const product = new ProductManager(dirname+'../db/products.json')
 
-// viewsRouter.get('/', async(req,res)=>{
-//     let allProds = await product.getProduct()
-//     res.render('home',{
-//         title: "Dragon Bar Z",
-//         products: allProds
-//     })
-// })
+
 viewsRouter.get("/", async (req, res) => {
     let allProducts = await product.getProduct()
     res.render('home', {

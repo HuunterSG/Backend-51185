@@ -1,0 +1,19 @@
+{
+  "name": "desafio.5",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Agustin J. Perez Rodriguez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "handlebars": "^4.7.7",
+    "joi": "^17.9.1",
+    "socket.io": "^4.6.1"
+  }
+}

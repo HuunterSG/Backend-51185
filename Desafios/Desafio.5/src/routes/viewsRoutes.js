@@ -16,7 +16,7 @@ const product = new ProductManager(dirname+'../db/products.json')
 viewsRouter.get("/", async (req, res) => {
     let allProducts = await product.getProduct()
     res.render('home', {
-        title: "The Drink Home",
+        title: "Dragon Bar Z",
         products: allProducts
     })
 })

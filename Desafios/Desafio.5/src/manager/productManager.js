@@ -9,8 +9,8 @@ import fs from 'fs';
     async getProduct(){
         try{
             const objs= await fs.promises.readFile(this.path,'utf-8')
-           
-            return  JSON.parse(objs)
+            const data= JSON.parse(objs)
+            return  data
         }catch(error){
             console.log(error)
             return []
@@ -89,7 +89,7 @@ import fs from 'fs';
         const productIndex = products.findIndex((product) => product.id === parseInt(id))
             if (productIndex === -1) {
               
-                return console.error(`El producto con ID "${id}" no existe.`)
+                return id
             }
         products.splice(productIndex, 1);
             await fs.promises.writeFile(this.path, JSON.stringify(products, null, '\t'))

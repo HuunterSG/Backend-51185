@@ -43,7 +43,7 @@ io.on('connection', async Socket=>{
         const products= await product.getProduct()
         io.emit('productList',products)
     })
-    Socket.on('product',async delProd=>{
+    Socket.on('productdelete',async delProd=>{
 
         let pid = await product.deleteProduct(delProd)
         const products = await product.getProduct()
